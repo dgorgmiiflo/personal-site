@@ -84,6 +84,41 @@ VALUES
 WHAT MAKES DAN RARE
 The combination of CMT-level market analysis + hands-on agricultural commodity brokerage + SaaS operations leadership + AI system building is genuinely uncommon. Most people in ag don't build technology. Most people in tech don't understand commodity markets. Dan has lived on both sides and built the bridge between them.`;
 
+const https = require("https");
+
+function callAnthropic(apiKey, body) {
+  return new Promise((resolve, reject) => {
+    const data = JSON.stringify(body);
+    const req = https.request(
+      {
+        hostname: "api.anthropic.com",
+        path: "/v1/messages",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": apiKey,
+          "anthropic-version": "2023-06-01",
+          "Content-Length": Buffer.byteLength(data),
+        },
+      },
+      (res) => {
+        let body = "";
+        res.on("data", (chunk) => (body += chunk));
+        res.on("end", () => {
+          try {
+            resolve({ status: res.statusCode, data: JSON.parse(body) });
+          } catch (e) {
+            reject(new Error("Failed to parse response: " + body.slice(0, 200)));
+          }
+        });
+      }
+    );
+    req.on("error", reject);
+    req.write(data);
+    req.end();
+  });
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 200, headers: corsHeaders(), body: "" };
@@ -95,6 +130,7 @@ exports.handler = async (event) => {
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
+    console.log("ERROR: ANTHROPIC_API_KEY not found in env");
     return {
       statusCode: 500,
       headers: corsHeaders(),
@@ -102,8 +138,11 @@ exports.handler = async (event) => {
     };
   }
 
+  console.log("API key found, length:", apiKey.length);
+
   try {
     const { messages, mode } = JSON.parse(event.body);
+    console.log("Request mode:", mode, "Messages:", messages.length);
 
     let systemPrompt = SYSTEM_PROMPT;
 
@@ -119,41 +158,36 @@ The user is pasting a job description. Analyze it against Dan's experience and p
 Be genuinely honest. If it's not a fit, say so clearly and explain why. If it IS a fit, show the specific evidence. This honesty is the entire point — it builds trust by being real, not by pitching.`;
     }
 
-    const response = await fetch(ANTHROPIC_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 1024,
-        system: systemPrompt,
-        messages: messages,
-      }),
+    console.log("Calling Anthropic API...");
+    const result = await callAnthropic(apiKey, {
+      model: "claude-haiku-4-5-20251001",
+      max_tokens: 1024,
+      system: systemPrompt,
+      messages: messages,
     });
 
-    const data = await response.json();
+    console.log("Anthropic response status:", result.status);
 
-    if (!response.ok) {
+    if (result.status !== 200) {
+      console.log("API error:", JSON.stringify(result.data));
       return {
-        statusCode: response.status,
+        statusCode: result.status,
         headers: corsHeaders(),
-        body: JSON.stringify({ error: data.error?.message || "API error" }),
+        body: JSON.stringify({ error: result.data.error?.message || "API error" }),
       };
     }
 
     return {
       statusCode: 200,
       headers: corsHeaders(),
-      body: JSON.stringify({ content: data.content[0].text }),
+      body: JSON.stringify({ content: result.data.content[0].text }),
     };
   } catch (err) {
+    console.log("CAUGHT ERROR:", err.message, err.stack);
     return {
       statusCode: 500,
       headers: corsHeaders(),
-      body: JSON.stringify({ error: "Internal server error" }),
+      body: JSON.stringify({ error: err.message }),
     };
   }
 };
