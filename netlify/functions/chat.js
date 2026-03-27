@@ -128,13 +128,18 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: "Method not allowed" };
   }
 
+  // Debug: log all env var names that contain "ANTHRO" or "API"
+  const envKeys = Object.keys(process.env).filter(k => k.includes("ANTHRO") || k.includes("API") || k.includes("anthro"));
+  console.log("Matching env var names:", envKeys);
+  console.log("All env var names:", Object.keys(process.env).sort().join(", "));
+
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     console.log("ERROR: ANTHROPIC_API_KEY not found in env");
     return {
       statusCode: 500,
       headers: corsHeaders(),
-      body: JSON.stringify({ error: "API key not configured" }),
+      body: JSON.stringify({ error: "API key not configured. Found env vars: " + envKeys.join(", ") }),
     };
   }
 
