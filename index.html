@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dan Gorghuber — Markets, Operations & Technology</title>
+<meta name="description" content="Dan Gorghuber — Markets, operations, and technology leader. 10+ years spanning institutional portfolio management, agricultural commodity brokerage, and SaaS operations.">
+<meta name="keywords" content="Dan Gorghuber, portfolio management, commodity broker, SaaS operations, CMT, technical analysis, agricultural commodities, risk management">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1419;
+    --ink-soft: #1c2127;
+    --charcoal: #2d3339;
+    --stone: #6b7280;
+    --stone-light: #9ca3af;
+    --copper: #b87333;
+    --copper-light: #d4a373;
+    --copper-glow: rgba(184,115,51,0.12);
+    --sage: #5b7a5e;
+    --sage-light: #e9efea;
+    --amber: #a67c3d;
+    --amber-light: #f5f0e6;
+    --clay: #8b5e5e;
+    --clay-light: #f5eded;
+    --cream: #faf8f5;
+    --warm-white: #f3f0eb;
+    --white: #ffffff;
+    --border: #e5e2dd;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* --- SCROLL REVEAL --- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* --- HERO --- */
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    background: var(--ink);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(184,115,51,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(91,122,94,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  /* Subtle noise texture */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 100px 48px 80px;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--copper-light);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(2.8rem, 6vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s forwards;
+  }
+
+  .hero-tagline {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--copper-light);
+    line-height: 1.55;
+    max-width: 520px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.6s forwards;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.8s forwards;
+  }
+  .hero-meta-item {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--stone-light);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hero-meta-item::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--copper);
+  }
+  .hero-meta-item:first-child::before { display: none; }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s 1.0s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--copper);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background var(--transition), transform 0.15s ease;
+    letter-spacing: 0.2px;
+  }
+  .btn-primary:hover { background: #a56628; transform: translateY(-1px); }
+
+  .btn-ghost {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--stone-light);
+    text-decoration: none;
+    padding: 14px 8px;
+    transition: color var(--transition);
+  }
+  .btn-ghost:hover { color: var(--copper-light); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --- NAV BAR (minimal) --- */
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 16px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.4s, box-shadow 0.4s;
+  }
+  .topbar.scrolled {
+    background: rgba(15,20,25,0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+  }
+  .topbar-name {
+    font-family: 'Fraunces', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: -0.3px;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .topbar.scrolled .topbar-name { opacity: 1; }
+  .topbar-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .topbar-links a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(250,248,245,0.5);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color var(--transition);
+  }
+  .topbar-links a:hover { color: var(--copper-light); }
+
+  /* --- CONTAINER --- */
+  .container { max-width: 780px; margin: 0 auto; padding: 0 48px; }
+
+  /* --- SECTION --- */
+  .section { padding: 72px 0; }
+
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* --- ABOUT --- */
+  .about-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--charcoal);
+  }
+  .about-text p { margin-bottom: 20px; }
+
+  .about-lead {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .scripture {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--stone);
+    margin-top: 32px;
+    padding: 24px 0 24px 24px;
+    border-left: 2px solid var(--copper);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  /* --- EXPERIENCE TIMELINE --- */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--copper), var(--border) 70%, transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 36px;
+    padding-bottom: 40px;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-dot {
+    position: absolute;
+    left: -4px;
+    top: 8px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--copper);
+    border: 2px solid var(--cream);
+  }
+
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 2px;
+  }
+  .timeline-role {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+  }
+  .timeline-date {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--stone);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .timeline-company {
+    font-size: 0.88rem;
+    color: var(--stone);
+    margin-bottom: 14px;
+  }
+
+  .timeline-bullets {
+    padding-left: 18px;
+    margin-bottom: 4px;
+  }
+  .timeline-bullets li {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 6px;
+    color: var(--charcoal);
+  }
+
+  .context-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--copper);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color var(--transition);
+  }
+  .context-toggle:hover { color: #a56628; }
+  .context-toggle .toggle-icon {
+    display: inline-block;
+    transition: transform var(--transition);
+    font-size: 0.65rem;
+  }
+  .context-toggle.open .toggle-icon { transform: rotate(90deg); }
+
+  .context-panel {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, margin 0.4s ease;
+    margin-top: 0;
+  }
+  .context-panel.open {
+    max-height: 600px;
+    opacity: 1;
+    margin-top: 16px;
+  }
+  .context-inner {
+    padding: 20px 24px;
+    background: var(--warm-white);
+    border-radius: 8px;
+    border-left: 3px solid var(--copper-light);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+  }
+  .context-inner p { margin-bottom: 12px; }
+  .context-inner p:last-child { margin-bottom: 0; }
+
+  /* --- CREDENTIALS --- */
+  .credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .credential-tag {
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 4px;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    color: var(--charcoal);
+    letter-spacing: 0.2px;
+  }
+
+  /* --- SKILLS MATRIX --- */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  @media (max-width: 640px) {
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+
+  .skills-col { background: var(--white); padding: 28px 24px; }
+
+  .skills-col-header {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid transparent;
+  }
+  .skills-col.strong .skills-col-header {
+    color: var(--sage);
+    border-bottom-color: var(--sage);
+  }
+  .skills-col.moderate .skills-col-header {
+    color: var(--amber);
+    border-bottom-color: var(--amber);
+  }
+  .skills-col.gaps .skills-col-header {
+    color: var(--clay);
+    border-bottom-color: var(--clay);
+  }
+
+  .skill-item {
+    font-size: 0.88rem;
+    padding: 7px 0;
+    color: var(--charcoal);
+    line-height: 1.45;
+  }
+
+  /* --- FIT ASSESSMENT --- */
+  .fit-section {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 12px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .fit-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .fit-section > * { position: relative; z-index: 1; }
+
+  .fit-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .fit-description {
+    font-size: 0.92rem;
+    color: var(--stone-light);
+    margin-bottom: 24px;
+    line-height: 1.65;
+    max-width: 560px;
+  }
+  .fit-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    resize: vertical;
+    background: rgba(255,255,255,0.06);
+    color: var(--cream);
+    transition: border-color var(--transition);
+  }
+  .fit-textarea:focus { outline: none; border-color: var(--copper); }
+  .fit-textarea::placeholder { color: var(--stone); }
+
+  .fit-submit {
+    margin-top: 16px;
+    padding: 12px 28px;
+    background: var(--copper);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition);
+    letter-spacing: 0.2px;
+  }
+  .fit-submit:hover { background: #a56628; }
+  .fit-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .fit-result {
+    margin-top: 24px;
+    padding: 24px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    display: none;
+    color: var(--cream);
+  }
+  .fit-result.visible { display: block; }
+  .fit-result h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; margin-bottom: 8px; color: var(--copper-light); }
+  .fit-result p { margin-bottom: 12px; }
+  .fit-result strong { color: var(--copper-light); }
+
+  /* --- CHAT FAB --- */
+  .chat-fab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--cream);
+    border: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, box-shadow var(--transition);
+    z-index: 1000;
+  }
+  .chat-fab:hover { transform: scale(1.06); box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
+
+  .chat-fab-label {
+    position: fixed;
+    bottom: 38px;
+    right: 94px;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(8px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .chat-fab:hover + .chat-fab-label { opacity: 1; transform: translateX(0); }
+
+  /* --- CHAT OVERLAY --- */
+  .chat-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,20,25,0.6);
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+  }
+  .chat-overlay.open { display: flex; align-items: center; justify-content: center; }
+
+  .chat-modal {
+    width: 90%;
+    max-width: 520px;
+    max-height: 80vh;
+    background: var(--cream);
+    border-radius: 12px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .chat-header {
+    padding: 18px 24px;
+    background: var(--ink);
+    color: var(--cream);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .chat-header-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .chat-header-sub { font-size: 0.75rem; color: var(--stone-light); margin-top: 2px; }
+  .chat-close {
+    background: none;
+    border: none;
+    color: rgba(250,248,245,0.5);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+    transition: color var(--transition);
+  }
+  .chat-close:hover { color: var(--cream); }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 280px;
+    background: var(--white);
+  }
+  .chat-msg {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .chat-msg.assistant {
+    background: var(--warm-white);
+    color: var(--ink);
+    align-self: flex-start;
+    border-bottom-left-radius: 3px;
+  }
+  .chat-msg.user {
+    background: var(--ink);
+    color: var(--cream);
+    align-self: flex-end;
+    border-bottom-right-radius: 3px;
+  }
+  .chat-msg p { margin-bottom: 8px; }
+  .chat-msg p:last-child { margin-bottom: 0; }
+  .chat-msg strong { font-weight: 600; }
+  .chat-msg ul, .chat-msg ol { padding-left: 18px; margin-bottom: 8px; }
+  .chat-msg li { margin-bottom: 4px; }
+  .chat-msg h3 { font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 600; margin: 10px 0 6px; }
+  .chat-msg h3:first-child { margin-top: 0; }
+
+  .chat-typing {
+    align-self: flex-start;
+    padding: 12px 16px;
+    background: var(--warm-white);
+    border-radius: 10px;
+    border-bottom-left-radius: 3px;
+    font-size: 0.82rem;
+    color: var(--stone);
+    display: none;
+  }
+  .chat-typing.visible { display: block; }
+
+  .chat-starters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 24px 14px;
+    background: var(--white);
+  }
+  .chat-starter {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    padding: 7px 14px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    color: var(--charcoal);
+    transition: all var(--transition);
+  }
+  .chat-starter:hover { background: var(--warm-white); border-color: var(--copper-light); color: var(--ink); }
+
+  .chat-input-area {
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    background: var(--cream);
+  }
+  .chat-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    background: var(--white);
+    color: var(--ink);
+    transition: border-color var(--transition);
+  }
+  .chat-input:focus { outline: none; border-color: var(--copper); }
+  .chat-input::placeholder { color: var(--stone-light); }
+  .chat-send {
+    padding: 10px 18px;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+  .chat-send:hover { background: var(--charcoal); }
+  .chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* --- FOOTER --- */
+  .footer {
+    text-align: center;
+    padding: 48px 24px;
+    font-size: 0.82rem;
+    color: var(--stone);
+  }
+  .footer a { color: var(--copper); text-decoration: none; transition: color var(--transition); }
+  .footer a:hover { color: #a56628; }
+  .footer-divider {
+    width: 32px;
+    height: 1px;
+    background: var(--border);
+    margin: 0 auto 16px;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .hero-inner { padding: 80px 28px 60px; }
+    .container { padding: 0 28px; }
+    .topbar { padding: 14px 24px; }
+    .topbar-links { gap: 16px; }
+    .section { padding: 52px 0; }
+    .fit-section { padding: 32px 24px; }
+  }
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 2.2rem; }
+    .hero-tagline { font-size: 1.05rem; }
+    .timeline-header { flex-direction: column; gap: 2px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .chat-modal { width: 95%; max-height: 90vh; }
+    .chat-fab-label { display: none; }
+    .hero-meta { gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar" id="topbar">
+  <span class="topbar-name">Dan Gorghuber</span>
+  <ul class="topbar-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#fit">Fit Assessment</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Markets &middot; Operations &middot; Technology</div>
+    <h1>Dan Gorghuber</h1>
+    <p class="hero-tagline">Closing the gap between markets and the people who depend on them.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">CMT (former)</span>
+      <span class="hero-meta-item">10+ Years</span>
+      <span class="hero-meta-item">Portfolio Management</span>
+      <span class="hero-meta-item">Commodity Markets</span>
+      <span class="hero-meta-item">AI Systems</span>
+    </div>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openChat()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        Ask AI About Me
+      </button>
+      <a href="mailto:gorghuberdan@gmail.com" class="btn-ghost">gorghuberdan@gmail.com</a>
+      <a href="https://linkedin.com/in/dangorghuber" class="btn-ghost">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="container">
+  <section class="section reveal" id="about">
+    <div class="section-label">About</div>
+    <p class="about-lead">I've spent my career at the intersection of markets, operations, and technology &mdash; from managing institutional portfolios to brokering commodities for Midwest farmers to building AI-powered systems at a SaaS startup.</p>
+    <div class="about-text">
+      <p>It started at Bell Bank, where I was part of a team managing $5B in assets for high-net-worth clients. Then I moved to the other side of the table as a commodity broker, working directly with farmers and producers across the upper Midwest. Soybeans, corn, wheat, cattle, crude &mdash; I helped them manage risk through futures and options, translating market complexity into decisions they could act on.</p>
+      <p>That experience showed me how broken the tools were. The people closest to the markets had the worst infrastructure. So I moved into technology &mdash; first streamlining trade operations at a wealth advisory firm, then as Director of Operations at Miiflo, where I've built AI-powered systems, a risk management dashboard, and the operational backbone for a growing SaaS company.</p>
+      <p>The thread through all of it: I find the gap between what markets are doing and what the people in them actually need, then I build the system to close it.</p>
+      <div class="scripture">"Study to be quiet, mind your own business, and work with your own hands." &mdash; 1 Thessalonians 4:11</div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section reveal" id="experience">
+    <div class="section-label">Experience</div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-role">Director of Operations</span>
+          <span class="timeline-date">Jan 2025 &ndash; Present</span>
+        </div>
+        <div class="timeline-company">Miiflo &middot; Fort Collins, CO (Remote)</div>
+        <ul class="timeline-bullets">
+          <li>Designed and built a comprehensive admin dashboard and risk management portal &mdash; valued at $250K+ in equivalent development costs</li>
+          <li>Built AI-powered automation: daily team briefings, intelligent Slack assistant, automated task workflows, cross-platform notifications</li>
+          <li>Manage model portfolios: strategy backtesting, performance auditing, model sleeve oversight</li>
+          <li>Lead operations for a team of 4 with 1-2 direct reports</li>
+        </ul>
+        <button class="context-toggle" onclick="toggleContext(this)">
+          <span class="toggle-icon">&#9654;</span> Deeper context
+        </button>
+        <div class="context-panel">
+          <div class="context-inner">
+            <p>Early team member since near-inception. Miiflo builds risk management tools for financial advisors, and Dan owns the operational and technical infrastructure that keeps the company running.</p>
+            <p>The dashboard wasn't a pre-planned project &mdash; Dan identified the gap in internal tooling, taught himself the stack (Node.js, Supabase, Netlify), and built it from scratch. The CEO valued it at $250K+ because getting equivalent functionality from a development agency would have cost that or more.</p>
+            <p>The AI systems are similarly self-built: a Slack bot that synthesizes daily briefings from Notion, email, and calendar data; automated task workflows that parse meeting notes into actionable items; and a notification infrastructure that routes alerts across Slack, email, and webhooks.</p>
+            <p>This role is where all three pillars converge: market expertise (model portfolio management), operations (team leadership, process design), and technology (building production systems from scratch).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-role">Analyst</span>
+          <span class="timeline-date">Mar 2022 &ndash; Oct 2024</span>
+        </div>
+        <div class="timeline-company">Client First Tax and Wealth Advisors &middot; West Bend, WI</div>
+        <ul class="timeline-bullets">
+          <li>Operations analyst supporting trading and portfolio management teams</li>
+          <li>Executed trades, managed model sleeve allocations, reconciled portfolio data</li>
+          <li>Delivered client-facing educational presentations on investment methodology</li>
+        </ul>
+        <button class="context-toggle" onclick="toggleContext(this)">
+          <span class="toggle-icon">&#9654;</span> Deeper context
+        </button>
+        <div class="context-panel">
+          <div class="context-inner">
+            <p>This role bridged Dan's commodity brokerage experience with his eventual move into SaaS operations. Working at a tax-focused wealth advisory firm gave him exposure to a different client base (HNW individuals vs. agricultural producers) and a different operational model (advisory vs. brokerage).</p>
+            <p>The workflow improvements he made here planted the seed for the operational systems thinking he'd later bring to Miiflo. He saw firsthand how manual processes in trade execution and data reconciliation created unnecessary friction and risk.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-role">Marketing Specialist</span>
+          <span class="timeline-date">Jul 2018 &ndash; Feb 2022</span>
+        </div>
+        <div class="timeline-company">Van Ahn & Company &middot; Alexandria, MN</div>
+        <ul class="timeline-bullets">
+          <li>Managed a personal book of ~20 farmer and producer clients across the upper Midwest</li>
+          <li>Risk management through futures and options: soybeans, corn, wheat, cattle, hogs, crude oil</li>
+          <li>Specialized in high-probability option selling strategies &mdash; reframed client thinking from speculation to systematic outcomes</li>
+          <li>Former clients still reach out years after departure seeking advisory services</li>
+        </ul>
+        <button class="context-toggle" onclick="toggleContext(this)">
+          <span class="toggle-icon">&#9654;</span> Deeper context
+        </button>
+        <div class="context-panel">
+          <div class="context-inner">
+            <p>This was the formative role. Dan worked directly with farmers managing operations from 250 to 7,500 acres, helping them hedge crop and livestock exposure. Orders cleared through RCG Chicago.</p>
+            <p>The real skill wasn't execution &mdash; it was behavioral coaching. Agricultural producers face enormous emotional pressure during volatile markets. Dan's job was to keep them disciplined: stick to the plan, manage risk systematically, don't chase markets on fear or greed. He became a trusted advisor, not just a broker.</p>
+            <p>The option selling specialization was distinctive. Rather than speculative directional bets, Dan built strategies around selling premium &mdash; harvesting time decay with high-probability setups. This required deep understanding of both the technical (Greeks, volatility surfaces) and the practical (crop cycles, basis risk, delivery logistics).</p>
+            <p>This experience is what makes Dan rare in tech: he doesn't just understand markets theoretically. He's sat across the kitchen table from a farmer deciding whether to hedge next year's crop, and he knows what information they actually need vs. what the tools give them.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-role">Technical Analyst</span>
+          <span class="timeline-date">2017 &ndash; 2020</span>
+        </div>
+        <div class="timeline-company">ETFGuide.com &middot; Fargo, ND</div>
+        <ul class="timeline-bullets">
+          <li>Published weekly technical analysis reports and premium monthly research letters</li>
+        </ul>
+        <button class="context-toggle" onclick="toggleContext(this)">
+          <span class="toggle-icon">&#9654;</span> Deeper context
+        </button>
+        <div class="context-panel">
+          <div class="context-inner">
+            <p>Dan wrote market analysis for a subscriber-based financial media platform while simultaneously brokering commodities at Van Ahn. This dual role sharpened his ability to translate complex market dynamics into clear, actionable writing &mdash; a skill that shows up in everything from his Slack briefing systems to client presentations.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-role">Portfolio Manager</span>
+          <span class="timeline-date">Jun 2015 &ndash; Jun 2018</span>
+        </div>
+        <div class="timeline-company">Bell Bank &middot; Fargo, ND</div>
+        <ul class="timeline-bullets">
+          <li>Member of a 4-person team managing $5B in assets for high-net-worth clients</li>
+          <li>Executed trades of $25M+ per position across equity, fixed income, and alternatives</li>
+          <li>Supported CIO on dividend portfolio strategy; built financial models and backtested strategies</li>
+        </ul>
+        <button class="context-toggle" onclick="toggleContext(this)">
+          <span class="toggle-icon">&#9654;</span> Deeper context
+        </button>
+        <div class="context-panel">
+          <div class="context-inner">
+            <p>Dan started at Bell Bank as a teller in December 2013 while completing his finance degree at NDSU. He progressed through a wealth management internship to a full Portfolio Manager role in under two years &mdash; a trajectory that reflected both capability and initiative.</p>
+            <p>On the team, he collaborated with trust and retirement officers on asset allocation and economic forecasting. The CIO mentorship gave him institutional-grade thinking about portfolio construction, risk budgeting, and the discipline of managing other people's money at scale.</p>
+            <p>This is where Dan's market foundation was built. The combination of a CMT designation, $5B AUM exposure, and hands-on backtesting work gave him a quantitative and systematic approach to markets that he carried into every subsequent role.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section reveal">
+    <div class="section-label">Education & Recognition</div>
+    <div class="timeline">
+      <div class="timeline-item" style="padding-bottom: 0;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-role">North Dakota State University</span>
+          <span class="timeline-date">2011 &ndash; 2015</span>
+        </div>
+        <div class="timeline-company">B.S. Finance</div>
+        <ul class="timeline-bullets">
+          <li>President, Student Managed Investment Fund (Bison Fund) &mdash; led 15 students managing a $1.3M live portfolio</li>
+          <li>Advisory Board Member (2015&ndash;present)</li>
+          <li><strong>#1 National Collegiate Trading Champion</strong> &mdash; Invoost, Nasdaq 100 day trading competition (2013)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="credentials">
+      <span class="credential-tag">Chartered Market Technician (CMT) &mdash; formerly designated</span>
+      <span class="credential-tag">Series 3 &mdash; passed, formerly licensed</span>
+      <span class="credential-tag">Bloomberg: Equity, FX, Commodities</span>
+    </div>
+  </section>
+
+  <!-- SKILLS MATRIX -->
+  <section class="section reveal" id="skills">
+    <div class="section-label">Skills &mdash; Honest Assessment</div>
+    <div class="skills-grid">
+      <div class="skills-col strong">
+        <div class="skills-col-header">Strong</div>
+        <div class="skill-item">Technical & Fundamental Analysis</div>
+        <div class="skill-item">Risk Management & Hedging</div>
+        <div class="skill-item">Option Selling Strategies</div>
+        <div class="skill-item">Futures/Options Execution</div>
+        <div class="skill-item">Portfolio Management</div>
+        <div class="skill-item">Model Backtesting & Auditing</div>
+        <div class="skill-item">Process Design & Optimization</div>
+        <div class="skill-item">Team Leadership</div>
+        <div class="skill-item">AI Workflow Automation</div>
+        <div class="skill-item">Dashboard & Tool Development</div>
+      </div>
+      <div class="skills-col moderate">
+        <div class="skills-col-header">Moderate</div>
+        <div class="skill-item">Web Development (Node.js, JS)</div>
+        <div class="skill-item">Database Design (Postgres)</div>
+        <div class="skill-item">API Integrations</div>
+        <div class="skill-item">Financial Modeling (Excel)</div>
+        <div class="skill-item">Client Advisory & Education</div>
+        <div class="skill-item">Technical Writing</div>
+      </div>
+      <div class="skills-col gaps">
+        <div class="skills-col-header">Growth Areas</div>
+        <div class="skill-item">Consumer Product Development</div>
+        <div class="skill-item">Mobile Development</div>
+        <div class="skill-item">Enterprise Sales</div>
+        <div class="skill-item">Formal Software Engineering</div>
+        <div class="skill-item">ML Model Training</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIT ASSESSMENT -->
+  <section class="section reveal" id="fit">
+    <div class="fit-section">
+      <div class="fit-heading">Is there a fit?</div>
+      <p class="fit-description">Paste a job description below. The AI will analyze it against my actual experience and give you an honest assessment &mdash; including where the fit is weak. This saves both of us time.</p>
+      <textarea class="fit-textarea" id="fitInput" placeholder="Paste the full job description here..."></textarea>
+      <button class="fit-submit" id="fitSubmit" onclick="runFitAssessment()">Analyze Fit</button>
+      <div class="fit-result" id="fitResult"></div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-divider"></div>
+  <p><a href="mailto:gorghuberdan@gmail.com">gorghuberdan@gmail.com</a> &nbsp;&middot;&nbsp; <a href="https://linkedin.com/in/dangorghuber">LinkedIn</a></p>
+</footer>
+
+<!-- CHAT FAB -->
+<button class="chat-fab" onclick="openChat()" aria-label="Ask AI about Dan">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+</button>
+<div class="chat-fab-label">Ask AI about Dan</div>
+
+<!-- CHAT MODAL -->
+<div class="chat-overlay" id="chatOverlay">
+  <div class="chat-modal">
+    <div class="chat-header">
+      <div>
+        <div class="chat-header-title">Ask AI about Dan</div>
+        <div class="chat-header-sub">Powered by real experience, not marketing copy</div>
+      </div>
+      <button class="chat-close" onclick="closeChat()">&times;</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg assistant">
+        <p>Hi! I'm an AI trained on Dan's professional experience. Ask me anything &mdash; about his background, skills, how he works, or whether he might be a fit for a role you're hiring for. I'll be specific and honest.</p>
+      </div>
+    </div>
+    <div class="chat-starters" id="chatStarters">
+      <button class="chat-starter" onclick="sendStarter(this)">What makes Dan different?</button>
+      <button class="chat-starter" onclick="sendStarter(this)">Tell me about his commodity brokerage experience</button>
+      <button class="chat-starter" onclick="sendStarter(this)">What has he built at Miiflo?</button>
+      <button class="chat-starter" onclick="sendStarter(this)">What are his weaknesses?</button>
+    </div>
+    <div class="chat-input-area">
+      <input class="chat-input" id="chatInput" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')sendMessage()">
+      <button class="chat-send" id="chatSend" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // --- Scroll Reveal ---
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // --- Topbar scroll ---
+  window.addEventListener('scroll', () => {
+    document.getElementById('topbar').classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
+
+  // --- Smooth scroll for nav links ---
+  document.querySelectorAll('.topbar-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // --- Expandable Context (smooth height) ---
+  function toggleContext(btn) {
+    const panel = btn.nextElementSibling;
+    btn.classList.toggle('open');
+    panel.classList.toggle('open');
+  }
+
+  // --- Chat ---
+  let chatHistory = [];
+
+  function openChat() {
+    document.getElementById('chatOverlay').classList.add('open');
+    document.getElementById('chatInput').focus();
+  }
+
+  function closeChat() {
+    document.getElementById('chatOverlay').classList.remove('open');
+  }
+
+  document.getElementById('chatOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeChat();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeChat();
+  });
+
+  function sendStarter(btn) {
+    document.getElementById('chatInput').value = btn.textContent;
+    document.getElementById('chatStarters').style.display = 'none';
+    sendMessage();
+  }
+
+  async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    input.value = '';
+    document.getElementById('chatStarters').style.display = 'none';
+
+    appendMessage('user', msg);
+    chatHistory.push({ role: 'user', content: msg });
+
+    const typing = document.createElement('div');
+    typing.className = 'chat-typing visible';
+    typing.textContent = 'Thinking...';
+    document.getElementById('chatMessages').appendChild(typing);
+    scrollChat();
+
+    document.getElementById('chatSend').disabled = true;
+    document.getElementById('chatInput').disabled = true;
+
+    try {
+      const res = await fetch('/.netlify/functions/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: chatHistory, mode: 'chat' }),
+      });
+
+      const data = await res.json();
+
+      if (data.error) {
+        appendMessage('assistant', 'Sorry, something went wrong. Please try again.');
+      } else {
+        chatHistory.push({ role: 'assistant', content: data.content });
+        appendMessage('assistant', data.content);
+      }
+    } catch (err) {
+      appendMessage('assistant', 'Sorry, I couldn\'t connect. Please try again later.');
+    }
+
+    typing.remove();
+    document.getElementById('chatSend').disabled = false;
+    document.getElementById('chatInput').disabled = false;
+    document.getElementById('chatInput').focus();
+  }
+
+  function appendMessage(role, text) {
+    const div = document.createElement('div');
+    div.className = `chat-msg ${role}`;
+    div.innerHTML = renderMarkdown(text);
+    document.getElementById('chatMessages').appendChild(div);
+    scrollChat();
+  }
+
+  function scrollChat() {
+    const messages = document.getElementById('chatMessages');
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function renderMarkdown(text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>')
+      .replace(/^(.*)$/, '<p>$1</p>')
+      .replace(/<p><h3>/g, '<h3>')
+      .replace(/<\/h3><\/p>/g, '</h3>')
+      .replace(/<p><ul>/g, '<ul>')
+      .replace(/<\/ul><\/p>/g, '</ul>')
+      .replace(/<p><\/p>/g, '');
+  }
+
+  // --- Fit Assessment ---
+  async function runFitAssessment() {
+    const input = document.getElementById('fitInput');
+    const jd = input.value.trim();
+    if (!jd) return;
+
+    const btn = document.getElementById('fitSubmit');
+    const result = document.getElementById('fitResult');
+
+    btn.disabled = true;
+    btn.textContent = 'Analyzing...';
+    result.className = 'fit-result visible';
+    result.innerHTML = '<p style="color: var(--stone-light);">Analyzing the job description against Dan\'s experience...</p>';
+
+    try {
+      const res = await fetch('/.netlify/functions/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [{ role: 'user', content: `Please analyze this job description for fit:\n\n${jd}` }],
+          mode: 'fit-assessment',
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.error) {
+        result.innerHTML = '<p>Sorry, something went wrong. Please try again.</p>';
+      } else {
+        result.innerHTML = renderMarkdown(data.content);
+      }
+    } catch (err) {
+      result.innerHTML = '<p>Sorry, couldn\'t connect. Please try again later.</p>';
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Analyze Fit';
+  }
+</script>
+
+</body>
+</html>
