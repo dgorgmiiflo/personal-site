@@ -56,7 +56,7 @@ PREVIOUS — Portfolio Manager, Bell Bank (Jun 2015–Jun 2018)
 EDUCATION
 - North Dakota State University — B.S. Finance (2011–2015)
 - President, Student Managed Investment Fund (Bison Fund) — led 15 students managing a $1.3M live portfolio
-- Advisory Board Member (2015–present)
+- Advisory Board Member (2015–2023)
 
 CERTIFICATIONS & RECOGNITION
 - Chartered Market Technician (CMT) — program completed, deep proficiency in technical analysis
